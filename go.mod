@@ -9,7 +9,6 @@ require (
 	github.com/NYTimes/gziphandler v1.1.1 // indirect
 	github.com/appscode/go v0.0.0-20200323182826-54e98e09185a
 	github.com/blang/semver v3.5.1+incompatible // indirect
-	github.com/evanphx/json-patch v4.5.0+incompatible
 	github.com/go-openapi/spec v0.19.3
 	github.com/gogo/protobuf v1.3.1
 	github.com/golang/glog v0.0.0-20160126235308-23def4e6c14b
@@ -20,7 +19,6 @@ require (
 	github.com/grpc-ecosystem/go-grpc-middleware v1.1.0 // indirect
 	github.com/grpc-ecosystem/grpc-gateway v1.12.1 // indirect
 	github.com/hashicorp/golang-lru v0.5.3 // indirect
-	github.com/json-iterator/go v1.1.8
 	github.com/mattn/go-isatty v0.0.9 // indirect
 	github.com/onsi/gomega v1.7.1 // indirect
 	github.com/prometheus/client_golang v1.2.1 // indirect
