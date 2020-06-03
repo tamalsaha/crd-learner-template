@@ -38,6 +38,11 @@ spec:
           metadata:
             type: object
           spec:
+            properties:
+              slackChannel:
+                type: string
+            required:
+            - slackChannel
             type: object
           status:
             properties:

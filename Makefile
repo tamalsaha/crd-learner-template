@@ -22,7 +22,7 @@ BIN      := resource-model
 # Produce CRDs that work back to Kubernetes 1.11 (no version conversion)
 CRD_OPTIONS          ?= "crd:trivialVersions=true,preserveUnknownFields=false,crdVersions={v1}"
 CODE_GENERATOR_IMAGE ?= appscode/gengo:release-1.18
-API_GROUPS           ?= cluster:v1alpha1 identity:v1alpha1
+API_GROUPS           ?= cluster:v1alpha1
 
 # This version-strategy uses git tags to set the version string
 git_branch       := $(shell git rev-parse --abbrev-ref HEAD)
@@ -109,23 +109,6 @@ version:
 # Generate a typed clientset
 .PHONY: clientset
 clientset:
-	# for EAS types
-	@docker run --rm 	                                          \
-		-u $$(id -u):$$(id -g)                                    \
-		-v /tmp:/.cache                                           \
-		-v $$(pwd):$(DOCKER_REPO_ROOT)                            \
-		-w $(DOCKER_REPO_ROOT)                                    \
-		--env HTTP_PROXY=$(HTTP_PROXY)                            \
-		--env HTTPS_PROXY=$(HTTPS_PROXY)                          \
-		$(CODE_GENERATOR_IMAGE)                                   \
-		/go/src/k8s.io/code-generator/generate-internal-groups.sh \
-			"deepcopy,defaulter,conversion"                       \
-			$(GO_PKG)/$(REPO)/client                              \
-			$(GO_PKG)/$(REPO)/apis                                \
-			$(GO_PKG)/$(REPO)/apis                                \
-			identity:v1alpha1                                 \
-			--go-header-file "./hack/license/go.txt"
-
 	# for both CRD and EAS types
 	@docker run --rm 	                                          \
 		-u $$(id -u):$$(id -g)                                    \
@@ -239,7 +222,8 @@ gen-bindata:
 manifests: gen-crds label-crds gen-bindata
 
 .PHONY: gen
-gen: clientset gen-crd-protos manifests openapi
+# gen: clientset gen-crd-protos manifests openapi
+gen: clientset manifests
 
 fmt: $(BUILD_DIRS)
 	@docker run                                                 \

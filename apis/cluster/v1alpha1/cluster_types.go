@@ -42,6 +42,7 @@ type Cluster struct {
 }
 
 type ClusterSpec struct {
+	SlackChannel string `json:"slackChannel"`
 }
 
 type ClusterStatus struct {
